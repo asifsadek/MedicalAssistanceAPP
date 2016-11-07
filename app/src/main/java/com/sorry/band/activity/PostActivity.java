@@ -11,13 +11,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.sorry.band.R;
-import com.sorry.band.data.BodyInfor;
 import com.sorry.band.widget.PublishToolBar;
 import com.sorry.core.ActionCallbackListener;
-import com.sorry.core.AppAction;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PostActivity extends BaseActivity {
     private PublishToolBar titlebar;
@@ -62,7 +57,7 @@ public class PostActivity extends BaseActivity {
             Toast.makeText(PostActivity.this, "请输入内容！", Toast.LENGTH_SHORT).show();
         }
 
-        appAction.pushPost(application.getAccount(), title, content, addInforBox.isChecked(), new ActionCallbackListener<Void>() {
+        appAction.pushPost(application.getAccount(), application.getPersonalData().getName(), title, content, addInforBox.isChecked(), new ActionCallbackListener<Void>() {
             @Override
             public void onSuccess(Void data) {
                 appAction.showToast("发布成功", Toast.LENGTH_LONG, toastHanlder);

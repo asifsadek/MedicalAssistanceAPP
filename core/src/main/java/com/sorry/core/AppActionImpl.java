@@ -368,11 +368,12 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
-    public void pushPost(String account, String title, String content, boolean isWithInfo, final ActionCallbackListener<Void> listener) {
+    public void pushPost(String account, String name, String title, String content, boolean isWithInfo, final ActionCallbackListener<Void> listener) {
         PostData postData = new PostData();
         postData.setAccount(account);
         postData.setTitle(title);
         postData.setContent(content);
+        postData.setName(name);
 
         if(isWithInfo) {
             List<SignData> signDataList = new ArrayList<>();

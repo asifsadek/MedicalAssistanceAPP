@@ -457,59 +457,59 @@
 
     </RelativeLayout>
         <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/panel3"
-        android:visibility="gone"
-        android:background="@color/colorTransparentWhite">
-        <RelativeLayout
-            android:id="@+id/connectionGuideLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <ImageView
-                android:id="@+id/line1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/line_1"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="40dp"
-                android:layout_centerVertical="true"
-                />
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_toLeftOf="@id/line1"
-                android:background="@mipmap/guid1"
-                android:textColor="@color/colorWhite"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/heartRateGuideLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="100dp">
-            <ImageView
-                android:id="@+id/line2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/line_2"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/panel3"
+            android:visibility="gone"
+            android:background="@color/colorTransparentWhite">
+            <RelativeLayout
+                android:id="@+id/connectionGuideLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/line1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@mipmap/line_1"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_centerVertical="true"
+                    />
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:layout_toLeftOf="@id/line1"
+                    android:background="@mipmap/guid1"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/heartRateGuideLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="100dp">
+                <ImageView
+                    android:id="@+id/line2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@mipmap/line_2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
 
-                />
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_toRightOf="@id/line2"
-                android:background="@mipmap/guid2"
-                android:textColor="@color/colorWhite"
-                android:layout_centerVertical="true"
-                />
+                    />
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:layout_toRightOf="@id/line2"
+                    android:background="@mipmap/guid2"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
 
         <!-- As the main content view, the view below consumes the entire
              space available using match_parent in both dimensions. -->
@@ -548,7 +548,8 @@
                 android:background="@color/color161D37"
                 android:text="My Question"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:onClick="toStartMyPostActivity"/>
         </LinearLayout>
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

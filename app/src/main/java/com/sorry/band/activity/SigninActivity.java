@@ -33,6 +33,7 @@ import com.sorry.core.AppAction;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.smssdk.EventHandler;
@@ -78,8 +79,12 @@ public class SigninActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin_activity);
 		initView();
-		//generateTestData();
-        
+		Calendar c = Calendar.getInstance();
+		String month = String.format("%02d",c.get(Calendar.MONTH)+1);
+		String day = String.format("%02d",c.get(Calendar.DAY_OF_MONTH));
+		String time = month + "." + day;
+		Log.i("Date", time);
+		selectAllData();
 	}
 
 	private void selectAllData(){
@@ -97,7 +102,7 @@ public class SigninActivity extends BaseActivity {
 
 			@Override
 			public void onFailure(String errorEvent, String message) {
-
+				Log.i("DB",errorEvent+" "+message);
 			}
 		});
 	}
@@ -107,18 +112,18 @@ public class SigninActivity extends BaseActivity {
 		for(int i = 1; i <= 5; i++) {
 			ContentValues cValue = new ContentValues();
 			cValue.put("date", "08.2"+i);
-			cValue.put("heartrate", "8"+i);
-			cValue.put("step", "1088");
+			cValue.put("heartrate", String.valueOf((int) ( 50 * Math.random() + 50)));
+			cValue.put("step", String.valueOf((int) ( 9950 * Math.random() + 50)));
 			contentValuesList.add(cValue);
 		}
 		appAction.deleteAlldata("BodyData");
 		appAction.deleteAlldata("PerdayHeartRateData");
 		appAction.deleteAlldata("PerdayStepData");
 		appAction.insertIntoAllBodyData(contentValuesList);
-		appAction.exec("insert into PerdayStepData (time, step) values('08.31','1024');");
+/*		appAction.exec("insert into PerdayStepData (time, step) values('08.31','1024');");
 		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 08:31','65');");
 		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 12:31','100');");
-		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 20:31','80');");
+		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 20:31','80');");*/
 	}
 
 	private void initView(){

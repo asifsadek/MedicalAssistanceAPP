@@ -251,14 +251,15 @@ public class MainActivity extends BaseActivity {
                         public void onNotify(int heartRate) {
                             Log.i("HeartRate", "heart rate: " + heartRate);
                             Calendar c = Calendar.getInstance();
-                            String hour = c.get(Calendar.HOUR_OF_DAY)+"";
-                            String minute = c.get(Calendar.MINUTE)+"";
+                            String hour = String.format("%02d",c.get(Calendar.HOUR_OF_DAY));
+                            String minute = String.format("%02d",c.get(Calendar.MINUTE));
+                            appAction.insertIntoPerdayHeartrateData(heartRate+"");
                             uiAction.setText(new ViewMessage<TextView, String>(heartrateTextView, heartRate+"/MIN "+hour+":"+minute));
                             MibandMessage<Void, RealtimeStepsNotifyListener, MiBand> setStepMsg = new MibandMessage<Void, RealtimeStepsNotifyListener, MiBand>(null, new RealtimeStepsNotifyListener() {
                                 @Override
                                 public void onNotify(int steps) {
                                     uiAction.setText(new ViewMessage<TextView, String>(stepNumTextView, steps+""));
-                                    Log.i("Strp", steps+"");
+                                    Log.i("Step", steps+"");
 
                                 }
                             }, miBand);
@@ -408,6 +409,7 @@ public class MainActivity extends BaseActivity {
             public void onSuccess(ApiResponse<Void> data) {
                 appAction.showToast("提交个人信息成功！", Toast.LENGTH_SHORT, toastHanlder);
                 uiAction.changeVisiable(panel2);
+                uiAction.changeVisiable(panel3);
             }
 
             @Override
@@ -422,13 +424,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onScanResult(int callbackType, ScanResult result) {
                 BluetoothDevice device = result.getDevice();
-                Log.i("Bluetooth",device.getName());
-                Log.i("Bluetooth","name:" + device.getName() +
-                        ",uuid:"+ device.getUuids() +
-                        ",add:"+ device.getAddress() +
-                        ",type:"+ device.getType() +
-                        ",bondState:" + device.getBondState() +
-                        ",rssi:" + result.getRssi());
                 String item = device.getName() + "|" + device.getAddress();
                 if (!devices.containsKey(item)) {
                     devices.put(item, device);
@@ -511,6 +506,11 @@ public class MainActivity extends BaseActivity {
 
     public void toStartPostActivity(View view){
         Intent intent = new Intent(MainActivity.this, PostActivity.class);
+        startActivity(intent);
+    }
+
+    public void toStartMyPostActivity(View view){
+        Intent intent = new Intent(MainActivity.this, MyPostActivity.class);
         startActivity(intent);
     }
 }

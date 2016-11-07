@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class PostData {
     private String account;
+    private String name;
     private String title;
     private String content;
     private List<SignData> signDataList;
@@ -19,14 +20,23 @@ public class PostData {
         this.content = content;
     }
 
-    public PostData(String account, String title, String content, List<SignData> signDataList) {
+    public PostData() {
+    }
+
+    public PostData(String account, String name, String title, String content, List<SignData> signDataList) {
         this.account = account;
+        this.name = name;
         this.title = title;
         this.content = content;
         this.signDataList = signDataList;
     }
 
-    public PostData() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAccount() {

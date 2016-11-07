@@ -44,6 +44,6 @@ public interface AppAction {
     // 插入当前心跳
     public void insertIntoPerdayHeartrateData(String heartRate);
     // 发布帖子
-    public void pushPost(String account, String title, String content, boolean isWithInfo, ActionCallbackListener<Void> listener);
+    public void pushPost(String account, String name, String title, String content, boolean isWithInfo, ActionCallbackListener<Void> listener);
 
 }

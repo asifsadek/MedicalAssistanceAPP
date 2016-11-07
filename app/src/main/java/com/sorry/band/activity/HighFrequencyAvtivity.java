@@ -46,8 +46,6 @@ public class HighFrequencyAvtivity extends BaseActivity {
 
     private boolean isStart = false;
 
-    private final int UPDATEHEARTRATE = 0x11;
-
     private final int scanInterval = 60000;
     private final int countDownInterval = 1000;
     private final int warningHeartRate = 30;
@@ -71,9 +69,7 @@ public class HighFrequencyAvtivity extends BaseActivity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.high_frequency_activity);
-
         initView();
-
         initChart();
     }
 
@@ -111,6 +107,7 @@ public class HighFrequencyAvtivity extends BaseActivity {
                                 String hour = c.get(Calendar.HOUR_OF_DAY)+"";
                                 String minute = c.get(Calendar.MINUTE)+"";
                                 uiAction.setText(new ViewMessage<TextView, String>(heartRateTextView, heartRate+""));
+                                appAction.insertIntoPerdayHeartrateData(heartRate+"");
                                 heartRateScanTimer.start();
                                 if(heartRate < warningHeartRate){
                                     emergencyProgram();

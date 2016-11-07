@@ -10,17 +10,13 @@ import com.sorry.model.PostData;
 
 import cn.smssdk.EventHandler;
 import okhttp3.Callback;
-
-/**
- * Created by sorry on 8/29/16.
- */
 public interface Api {
 
-    public final static String REGISTER = "user.registerByPhone";
-    public final static String LOGIN = "user.loginByApp";
-    public final static String GET_PINFO = "user.getPersonalInfo";
-    public final static String PUSH_PINFO = "user.pushPersonalInfo";
-    public final static String PUSH_POST = "user.pushPost";
+    String REGISTER = "user.registerByPhone";
+    String LOGIN = "user.loginByApp";
+    String GET_PINFO = "user.getPersonalInfo";
+    String PUSH_PINFO = "user.pushPersonalInfo";
+    String PUSH_POST = "user.pushPost";
 
 
     public void showToast(Context context, String msg, int aloneTime);

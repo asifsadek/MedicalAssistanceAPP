@@ -49,6 +49,7 @@
         <activity android:name=".activity.MainActivity"></activity>
         <activity android:name="com.sorry.band.activity.HighFrequencyAvtivity"></activity>
         <activity android:name="com.sorry.band.activity.PostActivity"></activity>
+        <activity android:name="com.sorry.band.activity.MyPostActivity"></activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
