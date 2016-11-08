@@ -368,6 +368,11 @@ public class AppActionImpl implements AppAction {
     }
 
     @Override
+    public void collectLastDayData() {
+        api.collectOneDayData();
+    }
+
+    @Override
     public void pushPost(String account, String name, String title, String content, boolean isWithInfo, final ActionCallbackListener<Void> listener) {
         PostData postData = new PostData();
         postData.setAccount(account);

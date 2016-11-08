@@ -43,6 +43,8 @@ public interface AppAction {
     public void insertIntoPerdayStepData(String step);
     // 插入当前心跳
     public void insertIntoPerdayHeartrateData(String heartRate);
+    // 计算之前数据
+    public void collectLastDayData();
     // 发布帖子
     public void pushPost(String account, String name, String title, String content, boolean isWithInfo, ActionCallbackListener<Void> listener);
 

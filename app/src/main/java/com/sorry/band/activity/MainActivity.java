@@ -171,6 +171,7 @@ public class MainActivity extends BaseActivity {
 
         toGetPersonalInfor();
         toGetWeather();
+        toCollectLasttDayData();
         initChart(lineChart);
 
         icWeather.setOnClickListener(new OnClickListener() {
@@ -258,6 +259,7 @@ public class MainActivity extends BaseActivity {
                             MibandMessage<Void, RealtimeStepsNotifyListener, MiBand> setStepMsg = new MibandMessage<Void, RealtimeStepsNotifyListener, MiBand>(null, new RealtimeStepsNotifyListener() {
                                 @Override
                                 public void onNotify(int steps) {
+                                    appAction.insertIntoPerdayStepData(steps+"");
                                     uiAction.setText(new ViewMessage<TextView, String>(stepNumTextView, steps+""));
                                     Log.i("Step", steps+"");
 
@@ -280,7 +282,9 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-
+    public void toCollectLasttDayData(){
+        appAction.collectLastDayData();
+    }
 
     private void initChart(final LineChartView lineChart){
         lineChart.setInteractive(true);
