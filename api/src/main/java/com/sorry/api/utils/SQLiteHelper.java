@@ -19,6 +19,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS User (username VARCHAR PRIMARY KEY, pwd VARCHAR)");
         db.execSQL("CREATE TABLE IF NOT EXISTS BodyData (date VARCHAR PRIMARY KEY, heartrate VARCHAR, step VARCHAR)");
         db.execSQL("CREATE TABLE IF NOT EXISTS PerdayHeartRateData (no INTEGER PRIMARY KEY autoincrement,time VARCHAR, heartrate VARCHAR)");
         db.execSQL("CREATE TABLE IF NOT EXISTS PerdayStepData (no INTEGER PRIMARY KEY autoincrement,time VARCHAR, step VARCHAR)");

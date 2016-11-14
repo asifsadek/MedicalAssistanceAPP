@@ -187,6 +187,55 @@ public class AppActionImpl implements AppAction {
         });
     }
 
+    @Override
+    public void saveUser(String loginName, String password) {
+        api.saveUser(loginName, password);
+    }
+
+    @Override
+    public void loginIfNserExist(final ActionCallbackListener<String[]> listener) {
+        Cursor user = api.getUser();
+        user.moveToFirst();
+        if(user.getCount() != 0) {
+            final String username = user.getString(0);
+            final String pwd = user.getString(1);
+            // 请求登录
+            api.loginByApp(username, pwd, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    listener.onFailure(ErrorEvent.NET_ERROR, "请求服务器失败");
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (!response.isSuccessful()) {
+                        Log.i("AppAction","Unexpected code " + response);
+                        listener.onFailure(ErrorEvent.NET_ERROR, "请求服务器失败");
+                        throw new IOException("Unexpected code " + response);
+                    }
+                    if (response.isSuccessful()) {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<ApiResponse<Void>>() {}.getType();
+                        ApiResponse<Void> apiResponse = gson.fromJson(response.body().string(), type);
+
+                        if (apiResponse.isSuccess()) {
+                            String[] user= new String[2];
+                            user[0] = username;
+                            user[1] = pwd;
+                            listener.onSuccess(user);
+
+                        } else {
+                            listener.onFailure(apiResponse.getEvent(), apiResponse.getMsg());
+                        }
+                    }
+                }
+            });
+        }
+        else{
+            listener.onFailure(ExceptionEvent.NO_USER, "没有保存的用户名和密码");
+        }
+    }
+
 
     @Override
     public void getLocation(final ActionCallbackListener<List<Double>> listener) {

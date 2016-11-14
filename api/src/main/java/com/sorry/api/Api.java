@@ -50,10 +50,26 @@ public interface Api {
     public void loginByApp(String loginName, String password, Callback callback);
 
     /**
+     * 保存用户名密码
+     *
+     * @param username 用户名（手机号）
+     * @param password  明文密码
+     */
+
+    public void saveUser(String username, String password);
+
+    /**
+     * 获取保存的用户名密码
+     * @return
+     */
+
+    public Cursor getUser();
+    /**
      * 初始化定位
      *
      * @param locationClient 定位客户端
      */
+
     public void initLocation(LocationClient locationClient);
 
     /**

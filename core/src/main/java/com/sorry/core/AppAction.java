@@ -23,6 +23,10 @@ public interface AppAction {
     public void register(String phoneNum, String password, ActionCallbackListener<Void> registerListener);
     // 登录
     public void login(final String loginName, final String password, ActionCallbackListener<Void> listener);
+    // 保存用户名和密码
+    public void saveUser(final String loginName, final String password);
+    // 获取保存的用户名密码
+    public void loginIfNserExist(ActionCallbackListener<String[]> listener);
     // 初始化地图定位
     public void getLocation(final ActionCallbackListener<List<Double>> listener);
     // 获取天气

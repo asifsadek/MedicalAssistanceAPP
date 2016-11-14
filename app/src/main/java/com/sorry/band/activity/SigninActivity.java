@@ -84,7 +84,7 @@ public class SigninActivity extends BaseActivity {
 		String day = String.format("%02d",c.get(Calendar.DAY_OF_MONTH));
 		String time = month + "." + day;
 		Log.i("Date", time);
-		selectAllData();
+        toSigninIfUserExist();
 	}
 
 	private void selectAllData(){
@@ -222,6 +222,7 @@ public class SigninActivity extends BaseActivity {
                                     appAction.showToast(getString(R.string.toast_signup_success), Toast.LENGTH_SHORT, toastHanlder);
                                     application.setAccount(signupName);
                                     application.setPwd(password);
+									appAction.saveUser(signupName, password);
                                     Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }
@@ -242,6 +243,24 @@ public class SigninActivity extends BaseActivity {
 				});
 	}
 
+	public void toSigninIfUserExist(){
+        this.appAction.loginIfNserExist(new ActionCallbackListener<String[]>() {
+            @Override
+            public void onSuccess(String[] data) {
+                appAction.showToast(getString(R.string.toast_login_success), Toast.LENGTH_SHORT, toastHanlder);
+                application.setAccount(data[0]);
+                application.setPwd(data[1]);
+                Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(String errorEvent, String message) {
+
+            }
+        });
+    }
+
     public void toSignin(View view){
 		final String signinName = accountEdit.getText().toString();
         final String password = pwdEdit.getText().toString();
@@ -253,6 +272,7 @@ public class SigninActivity extends BaseActivity {
 				appAction.showToast(getString(R.string.toast_login_success), Toast.LENGTH_SHORT, toastHanlder);
                 application.setAccount(signinName);
                 application.setPwd(password);
+                appAction.saveUser(signinName, password);
                 Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                 startActivity(intent);
             }
