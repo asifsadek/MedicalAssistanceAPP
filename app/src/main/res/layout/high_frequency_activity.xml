@@ -2,46 +2,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite">
-    <ImageButton
-        android:id="@+id/exitButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@mipmap/ic_back_re_thin_black"/>
-    <TextView
-        android:id="@+id/heartRateNumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00"
-        android:textSize="45sp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="50dp"/>
-    <TextView
-        android:id="@+id/minTextView"
-        android:layout_toRightOf="@id/heartRateNumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="/MIN"
-        android:textColor="@color/colorGrey"
-        android:textSize="20sp"
-        android:layout_alignBottom="@id/heartRateNumTextView"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="10dp"/>
-    <TextView
-        android:id="@+id/countdownTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="距离下次检测还有0min 0sec"
-        android:textColor="@color/colorLightGrey"
-        android:layout_below="@id/heartRateNumTextView"
-        android:layout_alignLeft="@id/heartRateNumTextView"
-        android:layout_marginTop="15dp"/>
+    <RelativeLayout
+        android:id="@+id/dataLa"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:background="@color/colorPrimary">
+        <ImageButton
+            android:id="@+id/exitButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/ic_back_re_thin_black"/>
+        <TextView
+            android:id="@+id/heartRateNumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textSize="55sp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/minTextView"
+            android:layout_toRightOf="@id/heartRateNumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/min"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:layout_alignBottom="@id/heartRateNumTextView"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/countdownTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="距离下次检测还有0min 0sec"
+            android:textColor="@color/colorLightGrey"
+            android:layout_below="@id/heartRateNumTextView"
+            android:layout_alignLeft="@id/heartRateNumTextView"
+            android:layout_marginTop="15dp"/>
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/chartLayout"
         android:layout_width="match_parent"
         android:layout_height="360dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg1">
+        android:background="@color/colorWhite">
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/heartRateChart"
             android:layout_width="fill_parent"
@@ -51,14 +59,18 @@
             android:layout_marginBottom="60dp"
             android:layout_marginLeft="50dp"/>
     </RelativeLayout>
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/startButton"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="right|bottom"
+        app:backgroundTint="@color/colorFAB"
+        android:src="@mipmap/ic_start"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:background="@mipmap/ic_start_highf"
-        android:layout_alignTop="@id/chartLayout"
-        android:layout_marginTop="8dp"
+        android:layout_below="@id/dataLa"
+        android:layout_marginTop="-30dp"
         />
 </RelativeLayout>

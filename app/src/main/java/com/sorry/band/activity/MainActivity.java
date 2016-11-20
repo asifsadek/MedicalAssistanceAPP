@@ -15,6 +15,7 @@ import com.sorry.core.AppAction;
 import com.sorry.core.MiBandHanlder;
 import com.sorry.core.MibandAction;
 import com.sorry.core.ToastHanlder;
+import com.sorry.core.UIAction;
 import com.sorry.model.MibandMessage;
 import com.sorry.model.PersonalData;
 import com.sorry.model.ViewMessage;
@@ -46,6 +47,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -55,6 +57,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -112,6 +116,8 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout menuLayout;
     private RelativeLayout barMenuLayout;
     private LinearLayout barMenu;
+    private TextView signinAccountTextView;
+    private Button signOutBtn;
 
     private Typeface numFont;
     private final int CONNECTED = 0x03;
@@ -169,6 +175,9 @@ public class MainActivity extends BaseActivity {
         startFAB = (FloatingActionButton) findViewById(R.id.startFAB);
         barMenu = (LinearLayout) findViewById(R.id.barMenu);
         barMenuLayout = (RelativeLayout) findViewById(R.id.barMenuLayout);
+        signinAccountTextView = (TextView) findViewById(R.id.signinAccountTextView);
+        signOutBtn = (Button) findViewById(R.id.signOutBtn);
+
 
         numFont = Typeface.createFromAsset(getResources().getAssets(), "fonts/BEBAS.ttf");
         /*stepNumTextView.setTypeface(numFont,Typeface.NORMAL);
@@ -183,7 +192,7 @@ public class MainActivity extends BaseActivity {
         toGetWeather();
         toCollectLasttDayData();
         initChart(lineChart);
-
+        uiAction.setText(new ViewMessage<TextView, String>(signinAccountTextView, "Signin ID: " + application.getAccount()));
         icWeather.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,7 +312,14 @@ public class MainActivity extends BaseActivity {
                 uiAction.changeVisiable(barMenuLayout);
             }
         });
-
+        signOutBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SigninActivity.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
     }
 
     public void toCollectLasttDayData(){

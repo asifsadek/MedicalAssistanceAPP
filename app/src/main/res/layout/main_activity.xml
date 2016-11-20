@@ -314,6 +314,7 @@
                     android:elevation="10dp"
                     android:id="@+id/barMenu">
                     <Button
+                        android:id="@+id/settingsBtn"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@color/colorWhite"
@@ -321,6 +322,7 @@
                         android:gravity="center_vertical"
                         android:paddingStart="20dp"/>
                     <Button
+                        android:id="@+id/signOutBtn"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@color/colorWhite"
@@ -628,33 +630,80 @@
     <RelativeLayout
         android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         android:id="@+id/lv_left_menu"
         android:layout_gravity="left"
         >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:elevation="10dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/md_bg"
+                android:scaleType="center"/>
+            <TextView
+                android:id="@+id/signinAccountTextView"
+                android:layout_alignParentBottom="true"
+                android:gravity="right"
+                android:paddingEnd="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Signin Account: "
+                android:textSize="16sp"
+                android:textColor="@color/colorWhite"
+                android:shadowDy="2"
+                android:shadowDx="2"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowRadius="2"/>
 
-        <LinearLayout
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_centerInParent="true">
+            <ImageView
+                android:id="@+id/ic_afh"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_message"/>
             <Button
+                android:layout_toRightOf="@id/ic_afh"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/color161D37"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:text="Ask for Help"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                android:onClick="toStartPostActivity"/>
+                android:textSize="14sp"
+                android:onClick="toStartPostActivity"
+                android:gravity="start|center_vertical"
+                android:paddingStart="16dp"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <ImageView
+                android:id="@+id/ic_comm"
+                android:layout_marginLeft="10dp"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_name"
+                android:layout_below="@id/ic_afh"
+                android:layout_marginTop="20dp"/>
             <Button
+                android:layout_toRightOf="@id/ic_comm"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/ic_afh"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/color161D37"
-                android:text="My Question"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                android:onClick="toStartMyPostActivity"/>
-        </LinearLayout>
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:text="Community"
+                android:textSize="14sp"
+                android:gravity="start|center_vertical"
+                android:onClick="toStartMyPostActivity"
+                android:paddingStart="16dp"
+                android:textColor="@color/colorPrimaryDark"/>
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

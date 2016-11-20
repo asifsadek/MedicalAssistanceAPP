@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -54,7 +55,7 @@ public class HighFrequencyAvtivity extends BaseActivity {
     private TextView countdownTextView;
     private TextView minTextView;
     private ImageButton exitButton;
-    private ImageButton startButton;
+    private FloatingActionButton startButton;
 
     private Typeface tf;
 
@@ -78,7 +79,7 @@ public class HighFrequencyAvtivity extends BaseActivity {
         countdownTextView = (TextView) findViewById(R.id.countdownTextView);
         minTextView = (TextView) findViewById(R.id.minTextView);
         exitButton = (ImageButton) findViewById(R.id.exitButton);
-        startButton = (ImageButton) findViewById(R.id.startButton);
+        startButton = (FloatingActionButton) findViewById(R.id.startButton);
         lineChart = (LineChartView) findViewById(R.id.heartRateChart);
         tf = Typeface.createFromAsset(getResources().getAssets(), "fonts/BEBAS.ttf");
         heartRateTextView.setTypeface(tf);
