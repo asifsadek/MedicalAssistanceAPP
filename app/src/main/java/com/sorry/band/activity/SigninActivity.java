@@ -84,6 +84,7 @@ public class SigninActivity extends BaseActivity {
 		String day = String.format("%02d",c.get(Calendar.DAY_OF_MONTH));
 		String time = month + "." + day;
 		Log.i("Date", time);
+		generateTestData();
         toSigninIfUserExist();
 	}
 
@@ -120,10 +121,9 @@ public class SigninActivity extends BaseActivity {
 		appAction.deleteAlldata("PerdayHeartRateData");
 		appAction.deleteAlldata("PerdayStepData");
 		appAction.insertIntoAllBodyData(contentValuesList);
-/*		appAction.exec("insert into PerdayStepData (time, step) values('08.31','1024');");
+		appAction.exec("insert into PerdayStepData (time, step) values('08.31','1024');");
 		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 08:31','65');");
 		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 12:31','100');");
-		appAction.exec("insert into PerdayHeartRateData (time, heartrate) values('08.31 20:31','80');");*/
 	}
 
 	private void initView(){

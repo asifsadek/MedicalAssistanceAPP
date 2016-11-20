@@ -8,8 +8,8 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppThemBase" parent="android:Theme.Light.NoTitleBar">
-
+    <style name="AppThemBase" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

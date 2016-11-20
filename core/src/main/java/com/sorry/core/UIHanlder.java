@@ -2,6 +2,7 @@ package com.sorry.core;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ public class UIHanlder extends Handler {
     public final static int CHANGE_CLICKABLE = 0X90;
     public final static int SET_TEXT = 0X91;
     public final static int CHANGE_VISIABLE = 0X92;
+    public final static int CHANGE_FAB_SRC = 0x93;
 
 
     @Override
@@ -35,6 +37,10 @@ public class UIHanlder extends Handler {
                 else {
                     ((View) msg.obj).setVisibility(View.VISIBLE);
                 }
+                break;
+            }
+            case CHANGE_FAB_SRC:{
+                (((ViewMessage<FloatingActionButton, Integer>)msg.obj).getView()).setImageResource(((ViewMessage<FloatingActionButton, Integer>)msg.obj).getMessage());
                 break;
             }
         }

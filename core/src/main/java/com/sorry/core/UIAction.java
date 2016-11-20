@@ -1,5 +1,6 @@
 package com.sorry.core;
 
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,4 +14,6 @@ public interface UIAction {
     public void setText(ViewMessage<TextView ,String> obj);
     //更改组件可见性
     public void changeVisiable(View obj);
+    //更改组件图片
+    public void changeFABSrc(ViewMessage<FloatingActionButton, Integer> viewMessage);
 }

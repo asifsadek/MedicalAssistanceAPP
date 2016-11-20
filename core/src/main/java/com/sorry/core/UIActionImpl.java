@@ -1,6 +1,7 @@
 package com.sorry.core;
 
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,4 +40,14 @@ public class UIActionImpl implements UIAction{
         msg.obj = obj;
         this.uiHanlder.sendMessage(msg);
     }
+
+    @Override
+    public void changeFABSrc(ViewMessage<FloatingActionButton, Integer> viewMessage) {
+        Message msg = new Message();
+        msg.what = UIHanlder.CHANGE_FAB_SRC;
+        msg.obj = viewMessage;
+        this.uiHanlder.sendMessage(msg);
+    }
+
+
 }

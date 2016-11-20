@@ -39,6 +39,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -76,11 +77,13 @@ public class MainActivity extends BaseActivity {
     private RelativeLayout panel1;
     private RelativeLayout panel2;
     private TextView stepNumTextView;
+    private TextView stepNumSubTextView;
     private TextView stepTextView;
     private TextView heartrateTextView;
+    private TextView heartrateSubTextView;
     private TextView sleepTextView;
     private TextView weatherTextView;
-    private ImageView icWeather;
+    private TextView icWeather;
     private MainToolbar titleBar;
     private TextView titleView;
     private TextView connectTag;
@@ -88,7 +91,7 @@ public class MainActivity extends BaseActivity {
     private SpinKitView connectAnimation;
     private LinearLayout scanResultLayout;
     private ScrollView scanResultScrollLayout;
-    private ImageView heartRateIcon;
+    private TextView heartRateIcon;
     private ImageButton highFrequencyButton;
     private ImageButton menuButton;
     private ImageButton showConnectLayoutButton;
@@ -102,11 +105,13 @@ public class MainActivity extends BaseActivity {
     private CheckBox femaleCheckBox;
     private EditText emPhoneEditView;
     private ImageButton inforConfirmButton;
-
+    private FloatingActionButton startFAB;
     private RelativeLayout chartLayout;
     private LineChartView lineChart;
 
     private DrawerLayout menuLayout;
+    private RelativeLayout barMenuLayout;
+    private LinearLayout barMenu;
 
     private Typeface numFont;
     private final int CONNECTED = 0x03;
@@ -115,6 +120,8 @@ public class MainActivity extends BaseActivity {
     private HashMap devices = new HashMap();
 
     private RelativeLayout panel3;
+
+    private boolean isConnected = false;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -131,22 +138,22 @@ public class MainActivity extends BaseActivity {
         panel2 = (RelativeLayout) findViewById(R.id.panel2);
         panel3 = (RelativeLayout) findViewById(R.id.panel3);
         stepNumTextView = (TextView) findViewById(R.id.stepNumTextView);
+        stepNumSubTextView = (TextView) findViewById(R.id.stepNumSubTextView);
         stepTextView = (TextView) findViewById(R.id.stepTextView);
         heartrateTextView = (TextView) findViewById(R.id.heartRateNumTextView);
+        heartrateSubTextView = (TextView) findViewById(R.id.heartRateNumSubTextView);
         sleepTextView = (TextView) findViewById(R.id.sleepTextView);
         weatherTextView = (TextView) findViewById(R.id.weatherTextView);
-        icWeather = (ImageView) findViewById(R.id.icWeather);
+        icWeather = (TextView) findViewById(R.id.icWeather);
         titleBar = (MainToolbar) findViewById(R.id.mainToolBar);
         titleView = titleBar.getTitleView();
         highFrequencyButton = titleBar.getHighFrequencyButton();
         menuButton= titleBar.getMenuButton();
-        heartRateIcon = (ImageView) findViewById(R.id.icHeartRate);
+        heartRateIcon = (TextView) findViewById(R.id.icHeartRate);
         scanResultLayout = (LinearLayout) findViewById(R.id.scanResultLayout);
         menuLayout = (DrawerLayout) findViewById(R.id.menuLayout);
         scanResultScrollLayout = (ScrollView) findViewById(R.id.scanResultScrollLayout);
-        connectTag = (TextView) findViewById(R.id.connectTag);
         connectAnimation = (SpinKitView) findViewById(R.id.spin_kit);
-        connectButtun = (ImageButton) findViewById(R.id.connectButton);
         nameEditView = (EditText)findViewById(R.id.nameEditView);
         heightEditView = (EditText)findViewById(R.id.heightEditView);
         weightEditView = (EditText)findViewById(R.id.weightEditView);
@@ -159,14 +166,17 @@ public class MainActivity extends BaseActivity {
         inforConfirmButton = (ImageButton)findViewById(R.id.inforConfirmButton);
         showConnectLayoutButton = (ImageButton)findViewById(R.id.showConnectLayoutButton);
         chartLayout = (RelativeLayout)findViewById(R.id.chartLayout);
+        startFAB = (FloatingActionButton) findViewById(R.id.startFAB);
+        barMenu = (LinearLayout) findViewById(R.id.barMenu);
+        barMenuLayout = (RelativeLayout) findViewById(R.id.barMenuLayout);
 
         numFont = Typeface.createFromAsset(getResources().getAssets(), "fonts/BEBAS.ttf");
-        stepNumTextView.setTypeface(numFont,Typeface.NORMAL);
+        /*stepNumTextView.setTypeface(numFont,Typeface.NORMAL);
         sleepTextView.setTypeface(numFont,Typeface.NORMAL);
         heartrateTextView.setTypeface(numFont,Typeface.NORMAL);
         stepTextView.setTypeface(numFont,Typeface.NORMAL);
         weatherTextView.setTypeface(numFont,Typeface.NORMAL);
-        connectTag.setTypeface(numFont,Typeface.NORMAL);
+        connectTag.setTypeface(numFont,Typeface.NORMAL);*/
         lineChart = (LineChartView)findViewById(R.id.chart);
 
         toGetPersonalInfor();
@@ -187,11 +197,18 @@ public class MainActivity extends BaseActivity {
                 panel3.setVisibility(View.GONE);
             }
         });
-        highFrequencyButton.setOnClickListener(new OnClickListener() {
+        startFAB.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HighFrequencyAvtivity.class);
-                startActivity(intent);
+                if(isConnected) {
+                    Intent intent = new Intent(MainActivity.this, HighFrequencyAvtivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    uiAction.changeVisiable(connectAnimation);
+                    uiAction.changeVisiable(chartLayout);
+                    scanDevices();
+                }
             }
         });
         menuButton.setOnClickListener(new OnClickListener() {
@@ -213,16 +230,6 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
-        connectButtun.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connectButtun.setVisibility(View.INVISIBLE);
-                connectButtun.setActivated(false);
-                connectAnimation.setVisibility(View.VISIBLE);
-                connectTag.setText("Searching...");
-                scanDevices();
-            }
-        });
         manCheckButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,6 +248,7 @@ public class MainActivity extends BaseActivity {
                 manCheckButton.setBackgroundResource(R.mipmap.ic_uncheck);
             }
         });
+
         heartRateIcon.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -251,18 +259,21 @@ public class MainActivity extends BaseActivity {
                         @Override
                         public void onNotify(int heartRate) {
                             Log.i("HeartRate", "heart rate: " + heartRate);
-                            Calendar c = Calendar.getInstance();
+                            final Calendar c = Calendar.getInstance();
                             String hour = String.format("%02d",c.get(Calendar.HOUR_OF_DAY));
                             String minute = String.format("%02d",c.get(Calendar.MINUTE));
                             appAction.insertIntoPerdayHeartrateData(heartRate+"");
-                            uiAction.setText(new ViewMessage<TextView, String>(heartrateTextView, heartRate+"/MIN "+hour+":"+minute));
+                            uiAction.setText(new ViewMessage<TextView, String>(heartrateTextView, heartRate+" /min "));
+                            uiAction.setText(new ViewMessage<TextView, String>(heartrateSubTextView, "Detection time: " + hour + ":" + minute));
                             MibandMessage<Void, RealtimeStepsNotifyListener, MiBand> setStepMsg = new MibandMessage<Void, RealtimeStepsNotifyListener, MiBand>(null, new RealtimeStepsNotifyListener() {
                                 @Override
                                 public void onNotify(int steps) {
                                     appAction.insertIntoPerdayStepData(steps+"");
-                                    uiAction.setText(new ViewMessage<TextView, String>(stepNumTextView, steps+""));
+
                                     Log.i("Step", steps+"");
 
+                                    uiAction.setText(new ViewMessage<TextView, String>(stepNumTextView, steps+" steps"));
+                                    uiAction.setText(new ViewMessage<TextView, String>(stepNumSubTextView, "Record date: " + c.getTime()));
                                 }
                             }, miBand);
                             mibandAction.setBand(MiBandHanlder.SET_STEP_LISTENER, setStepMsg);
@@ -280,6 +291,19 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+        highFrequencyButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uiAction.changeVisiable(barMenuLayout);
+            }
+        });
+        barMenuLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uiAction.changeVisiable(barMenuLayout);
+            }
+        });
+
     }
 
     public void toCollectLasttDayData(){
@@ -304,7 +328,7 @@ public class MainActivity extends BaseActivity {
                 }
                 cursor.close();
 
-                Line line = new Line(values).setColor(Color.parseColor("#5B6C86"));
+                Line line = new Line(values).setColor(Color.parseColor("#ffffff"));
                 line.setStrokeWidth(3);
                 line.setPointRadius(4);
                 List<Line> lines = new ArrayList<Line>();
@@ -316,12 +340,12 @@ public class MainActivity extends BaseActivity {
                 Axis axisX = new Axis(axisValues);
                 axisX.setHasSeparationLine(false);
                 data.setAxisXBottom(axisX);
-                axisX.setTextColor(Color.parseColor("#161D37"));
+                axisX.setTextColor(Color.parseColor("#ffffff"));
                 axisX.setTypeface(numFont);
 
                 Axis axisY = new Axis();
                 axisY.setMaxLabelChars(3);
-                axisY.setTextColor(Color.parseColor("#161D37"));
+                axisY.setTextColor(Color.parseColor("#ffffff"));
                 axisY.setTypeface(numFont);
                 data.setAxisYLeft(axisY);
                 lineChart.setViewportCalculationEnabled(false);
@@ -341,7 +365,7 @@ public class MainActivity extends BaseActivity {
                 LineChartData data = new LineChartData();
                 Axis axisY = new Axis();
                 axisY.setMaxLabelChars(3);
-                axisY.setTextColor(Color.parseColor("#161D37"));
+                axisY.setTextColor(Color.parseColor("#ffffff"));
                 axisY.setTypeface(numFont);
                 data.setAxisYLeft(axisY);
                 lineChart.setViewportCalculationEnabled(false);
@@ -434,14 +458,14 @@ public class MainActivity extends BaseActivity {
                     TextView textView = new TextView(MainActivity.this);
                     textView.setText(device.getName() + " " + device.getAddress());
                     textView.setGravity(Gravity.CENTER);
-                    Typeface numFont = Typeface.createFromAsset(getResources().getAssets(), "fonts/BEBAS.ttf");
-                    textView.setTypeface(numFont);
+                    textView.setTextColor(Color.parseColor("#ffffff"));
                     textView.setTextSize(16);
                     textView.setOnClickListener(new onDeviceClickListener(device));
                     scanResultLayout.addView(textView);
-                    connectTag.setVisibility(View.INVISIBLE);
-                    connectAnimation.setVisibility(View.INVISIBLE);
-                    scanResultScrollLayout.setVisibility(View.VISIBLE);
+                    if(!isConnected) {
+                        connectAnimation.setVisibility(View.INVISIBLE);
+                        scanResultScrollLayout.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         };
@@ -477,9 +501,12 @@ public class MainActivity extends BaseActivity {
                     );
                     MibandMessage<UserInfo, Void, MiBand> initMsg = new MibandMessage<UserInfo, Void, MiBand>(userInfo, null, miBand);
                     mibandAction.setBand(MiBandHanlder.INIT_BAND, initMsg);
-
+                    uiAction.changeVisiable(scanResultScrollLayout);
                     uiAction.changeVisiable(chartLayout);
+                    ViewMessage<FloatingActionButton, Integer> msg = new ViewMessage<FloatingActionButton, Integer>(startFAB, R.mipmap.ic_start);
+                    uiAction.changeFABSrc(msg);
                     Log.i("Miband","连接成功");
+                    isConnected = true;
 
                 }
 
@@ -500,8 +527,10 @@ public class MainActivity extends BaseActivity {
                 public void onNotify(byte[] data)
                 {
                     Log.i("Miband","连接断开!!!");
+                    isConnected = false;
                     if(chartLayout.getVisibility() == View.VISIBLE){
-                        uiAction.changeVisiable(showConnectLayoutButton);
+                        ViewMessage<FloatingActionButton, Integer> msg = new ViewMessage<FloatingActionButton, Integer>(startFAB, R.mipmap.ic_connected);
+                        uiAction.changeFABSrc(msg);
                     }
                 }
             });

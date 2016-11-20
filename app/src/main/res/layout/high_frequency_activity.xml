@@ -12,7 +12,7 @@
         android:id="@+id/heartRateNumTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="89"
+        android:text="00"
         android:textSize="45sp"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="50dp"/>
@@ -31,7 +31,7 @@
         android:id="@+id/countdownTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="距离下次检测还有4min 35sec"
+        android:text="距离下次检测还有0min 0sec"
         android:textColor="@color/colorLightGrey"
         android:layout_below="@id/heartRateNumTextView"
         android:layout_alignLeft="@id/heartRateNumTextView"

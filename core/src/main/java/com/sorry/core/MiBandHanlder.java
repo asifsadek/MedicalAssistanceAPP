@@ -69,8 +69,8 @@ public class MiBandHanlder extends Handler{
 
     private void setStepListener(MiBand miBand, RealtimeStepsNotifyListener stepsNotifyListener){
         Log.i("TIDsetStepListener",android.os.Process.myTid()+"");
-        Log.i("setStepLi","setting");
         miBand.setRealtimeStepsNotifyListener(stepsNotifyListener);
+        Log.i("setStepLi","setting");
         miBand.enableRealtimeStepsNotify();
         Log.i("setStepLi","Done");
     }

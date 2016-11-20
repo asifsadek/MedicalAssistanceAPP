@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@color/colorE2E4E3"
+    android:layout_height="55dp"
+    android:background="@color/colorPrimary"
     android:orientation="horizontal">
     <ImageButton
         android:id="@+id/menuButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="7dp"
-        android:background="@mipmap/ic_menu_black"
-        android:scaleType="center"
+        android:src="@mipmap/ic_menu"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
         android:contentDescription="@null"
         android:layout_centerVertical="true"
         />
@@ -18,22 +19,22 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/menuButton"
         android:text="HEALTH ASSISTANT"
-        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
         android:textStyle="bold"/>
     <ImageButton
         android:id="@+id/highFrequencyButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginRight="7dp"
-        android:background="@mipmap/ic_start_black"
-        android:scaleType="center"
+        android:src="@mipmap/ic_ver_menu"
+
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/color161D37"/>
 
 </RelativeLayout>

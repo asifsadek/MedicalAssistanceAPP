@@ -46,13 +46,21 @@
         <service android:name="com.sorry.band.service.ScanHeartrateService">
         </service>
 
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name="com.sorry.band.activity.HighFrequencyAvtivity"></activity>
-        <activity android:name="com.sorry.band.activity.PostActivity"></activity>
-        <activity android:name="com.sorry.band.activity.MyPostActivity"></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.sorry.band.activity.HighFrequencyAvtivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.sorry.band.activity.PostActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name="com.sorry.band.activity.MyPostActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
     </application>
