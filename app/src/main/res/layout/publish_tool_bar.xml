@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:background="@color/color161D37"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimary"
     android:orientation="horizontal">
     <ImageButton 
         android:id="@+id/backToMainButton"
        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@mipmap/ic_back_re_thin_white"
+        android:background="@mipmap/ic_back"
         android:scaleType="center"
         android:contentDescription="@null"
         android:layout_centerVertical="true"/>
-    <TextView 
+    <TextView
+        android:layout_marginLeft="5dp"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@id/backToMainButton"
         android:text="WRITE A POST"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"/>

@@ -123,14 +123,14 @@ public class HighFrequencyAvtivity extends BaseActivity {
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     if(!isStart) {
                         miBand.startHeartRateScan();
-                        startButton.setBackgroundResource(R.mipmap.ic_stop_highf);
+                        uiAction.changeFABSrc(new ViewMessage<FloatingActionButton, Integer>(startButton, R.mipmap.ic_pause));
                         isStart = true;
                     }
                     else{
                         isStart = false;
                         heartRateScanTimer.cancel();
                         countdownTextView.setText("已暂停");
-                        startButton.setBackgroundResource(R.mipmap.ic_start_highf);
+                        uiAction.changeFABSrc(new ViewMessage<FloatingActionButton, Integer>(startButton, R.mipmap.ic_start));
 
                     }
                 }
@@ -144,7 +144,7 @@ public class HighFrequencyAvtivity extends BaseActivity {
 
     private void initChart(){
         lineChart.setInteractive(true);
-        Line line = new Line(values).setColor(Color.parseColor("#ffffff"));
+        Line line = new Line(values).setColor(Color.parseColor("#445a65"));
         line.setStrokeWidth(3);
         line.setPointRadius(4);
         List<Line> lines = new ArrayList<Line>();
@@ -156,12 +156,12 @@ public class HighFrequencyAvtivity extends BaseActivity {
         Axis axisX = new Axis(axisValues);
         axisX.setHasSeparationLine(false);
         data.setAxisXBottom(axisX);
-        axisX.setTextColor(Color.parseColor("#ffffff"));
+        axisX.setTextColor(Color.parseColor("#445a65"));
         axisX.setTypeface(tf);
 
         Axis axisY = new Axis();
         axisY.setMaxLabelChars(3);
-        axisY.setTextColor(Color.parseColor("#ffffff"));
+        axisY.setTextColor(Color.parseColor("#445a65"));
         axisY.setTypeface(tf);
         data.setAxisYLeft(axisY);
         lineChart.setViewportCalculationEnabled(false);

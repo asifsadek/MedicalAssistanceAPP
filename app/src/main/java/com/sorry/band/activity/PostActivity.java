@@ -44,6 +44,7 @@ public class PostActivity extends BaseActivity {
                 post();
             }
         });
+        Log.i("Name", application.getPersonalData().getName());
     }
 
 

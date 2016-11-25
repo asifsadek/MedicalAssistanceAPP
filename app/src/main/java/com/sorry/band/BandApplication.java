@@ -26,7 +26,7 @@ public class BandApplication extends Application {
     private String account;
     private String pwd;
     private PersonalData personalData;
-
+    public boolean isSignOut = false;
     private boolean inited = false;
     private AppAction appAction;
     private UIAction uiAction;

@@ -11,9 +11,11 @@
         android:background="@color/colorPrimary">
         <ImageButton
             android:id="@+id/exitButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@mipmap/ic_back_re_thin_black"/>
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_back"/>
         <TextView
             android:id="@+id/heartRateNumTextView"
             android:layout_width="wrap_content"
@@ -21,7 +23,7 @@
             android:text="00"
             android:textSize="55sp"
             android:textColor="@color/colorWhite"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:layout_marginLeft="50dp"/>
         <TextView
             android:id="@+id/minTextView"
@@ -47,9 +49,10 @@
     <RelativeLayout
         android:id="@+id/chartLayout"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:layout_below="@id/dataLa">
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/heartRateChart"
             android:layout_width="fill_parent"

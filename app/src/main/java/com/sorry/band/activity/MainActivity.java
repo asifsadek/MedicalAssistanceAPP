@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity {
     private LinearLayout barMenu;
     private TextView signinAccountTextView;
     private Button signOutBtn;
-
+    private Button settingsBtn;
     private Typeface numFont;
     private final int CONNECTED = 0x03;
     private final int UPDATESTEPNUM = 0x04;
@@ -177,7 +177,7 @@ public class MainActivity extends BaseActivity {
         barMenuLayout = (RelativeLayout) findViewById(R.id.barMenuLayout);
         signinAccountTextView = (TextView) findViewById(R.id.signinAccountTextView);
         signOutBtn = (Button) findViewById(R.id.signOutBtn);
-
+        settingsBtn = (Button) findViewById(R.id.settingsBtn);
 
         numFont = Typeface.createFromAsset(getResources().getAssets(), "fonts/BEBAS.ttf");
         /*stepNumTextView.setTypeface(numFont,Typeface.NORMAL);
@@ -315,9 +315,16 @@ public class MainActivity extends BaseActivity {
         signOutBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                application.isSignOut = true;
                 Intent intent = new Intent(MainActivity.this, SigninActivity.class);
                 startActivity(intent);
                 MainActivity.this.finish();
+            }
+        });
+        settingsBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uiAction.changeVisiable(panel2);
             }
         });
     }

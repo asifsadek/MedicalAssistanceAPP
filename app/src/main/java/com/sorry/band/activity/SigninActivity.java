@@ -85,7 +85,9 @@ public class SigninActivity extends BaseActivity {
 		String time = month + "." + day;
 		Log.i("Date", time);
 		generateTestData();
-        toSigninIfUserExist();
+		if(!application.isSignOut) {
+			toSigninIfUserExist();
+		}
 	}
 
 	private void selectAllData(){
